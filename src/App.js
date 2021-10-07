@@ -11,6 +11,7 @@ const App = () => {
 
   return (
     <div>
+      <p> 1.0_setup </p>
       <h1>{course}</h1>
       <p>
         {part1} {exercises1}
