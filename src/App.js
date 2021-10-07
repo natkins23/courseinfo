@@ -5,7 +5,7 @@ import React from 'react'
 const Header = (props) => {
   
   return (
-<div>{props.course}</div>
+<h1>{props.course}</h1>
   )
 }
 const Content = (props) => {
@@ -28,7 +28,7 @@ const Content = (props) => {
 const Total = (props) => {
   
   return (
-<div>Total exercises: {props.sum}</div>
+<div>Number of exercises: {props.sum}</div>
   )
 }
 
