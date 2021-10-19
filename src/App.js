@@ -1,50 +1,5 @@
 import React from 'react'
-const Course = ({ course }) => {
-  return (
-    <div>
-      <Header name={course.name} />
-      <Content parts={course.parts} />
-    </div>
-  )
-}
-
-const Header = ({ name }) => {
-  return (
-    <>
-      <h1>{name}</h1>
-    </>
-  )
-}
-
-const Content = ({ parts }) => {
-  const ArrExerciseCount = parts.map((part) => part.exercises)
-  const totalExercises = ArrExerciseCount.reduce((sum, total) => {
-    return sum + total
-  }, 0)
-
-  return (
-    <div>
-      {parts.map((part) => {
-        return (
-          <Part key={part.id} name={part.name} exercises={part.exercises} />
-        )
-      })}
-      <div>
-        <b>total of {totalExercises} exercises</b>
-      </div>
-    </div>
-  )
-}
-
-const Part = ({ name, exercises }) => {
-  return (
-    <>
-      <p>
-        {name} {exercises}
-      </p>
-    </>
-  )
-}
+import Course from './components/Course'
 
 const App = () => {
   const courses = [
@@ -94,7 +49,7 @@ const App = () => {
 
   return (
     <>
-      <p>2.4</p>
+      <p>2.5</p>
       {courses.map((course) => (
         <Course key={course.id} course={course} />
       ))}
@@ -103,9 +58,20 @@ const App = () => {
 }
 
 export default App
+
+/* 2.5 module steps
+1) created a comonents folder inside of the src folder
+2) created a Course.js folder inside the components folder
+3) Copied the course component and all sub components including Header,Content, as well as Contents subcomponent of Part int the Course component folder
+4) imported react into the Course.js file
+5) exported as default the Course component
+
+
+*/
+
 /* 2.4 steps and notes
 1) just need to map through the courses array and return a course component that takes a course and a key
-
+*/
 
 /* 2.2 / 2.3 steps and notes
 1) had to clean up every component by DESTRUCTURING the props, this makes it a lot easier to know what the props actually are
