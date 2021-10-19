@@ -1,57 +1,52 @@
 import React from 'react'
-
-const Course = (props) => {
+const Course = ({ course }) => {
   return (
     <div>
-      <Header name={props.course.name} />
-      <Content
-        part1={props.course.parts[0]}
-        part2={props.course.parts[1]}
-        part3={props.course.parts[2]}
-      />
-      {/* <Total
-        sum={
-          course.parts[0].exercises +
-          course.parts[1].exercises +
-          course.parts[2].exercises
-        }
-      /> */}
+      <Header name={course.name} />
+      <Content parts={course.parts} />
     </div>
   )
 }
 
-const Header = (props) => {
+const Header = ({ name }) => {
   return (
     <>
-      <p>2.1</p>
-      <h1>{props.name}</h1>
+      <p>2.2</p>
+      <h1>{name}</h1>
     </>
   )
 }
 
-const Part = (props) => {
+const Content = ({ parts }) => {
+  const ArrExerciseCount = parts.map((part) => part.exercises)
+  const totalExercises = ArrExerciseCount.reduce((sum, total) => {
+    return sum + total
+  }, 0)
+
   return (
     <div>
+      {parts.map((part) => {
+        return (
+          <Part key={part.id} name={part.name} exercises={part.exercises} />
+        )
+      })}
+      <div>
+        <b>total of {totalExercises} exercises</b>
+      </div>
+    </div>
+  )
+}
+
+const Part = ({ name, exercises }) => {
+  return (
+    <>
       <p>
-        {props.part} {props.exercises}
+        {name} {exercises}
       </p>
-    </div>
+    </>
   )
 }
 
-const Content = (props) => {
-  return (
-    <div>
-      <Part part={props.part1.name} exercises={props.part1.exercises} />
-      <Part part={props.part2.name} exercises={props.part2.exercises} />
-      <Part part={props.part3.name} exercises={props.part3.exercises} />
-    </div>
-  )
-}
-
-// const Total = (props) => {
-//   return <div>Number of exercises: {props.sum}</div>
-// }
 const App = () => {
   const course = {
     id: 1,
@@ -72,6 +67,11 @@ const App = () => {
         exercises: 14,
         id: 3,
       },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4,
+      },
     ],
   }
 
@@ -83,3 +83,13 @@ const App = () => {
 }
 
 export default App
+
+/* 2.2 steps and notes
+1) had to clean up every component by DESTRUCTURING the props, this makes it a lot easier to know what the props actually are
+2) I then had to use higher order functions (MAP) to account for additions of new parts to the course, which would affect the sum of all courses.
+--- my map function returns a <Part/> component that recieves 2 props, the name and exercises of each part
+3) I use this similar process to create an array of all the all the exercises in each part, and then reduce that array to get the sum of the parts, I could also just use a sum function as well.
+4) I remove the total component as each content would have a total and so it would not be a reusable component
+5) I also had to create a key for each part which was had its own id and so i linked the id the part as its key to avoid the react error
+
+*/
