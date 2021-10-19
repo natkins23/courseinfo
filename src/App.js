@@ -11,7 +11,6 @@ const Course = ({ course }) => {
 const Header = ({ name }) => {
   return (
     <>
-      <p>2.2</p>
       <h1>{name}</h1>
     </>
   )
@@ -48,43 +47,67 @@ const Part = ({ name, exercises }) => {
 }
 
 const App = () => {
-  const course = {
-    id: 1,
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10,
-        id: 1,
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7,
-        id: 2,
-      },
-      {
-        name: 'State of a component',
-        exercises: 14,
-        id: 3,
-      },
-      {
-        name: 'Redux',
-        exercises: 11,
-        id: 4,
-      },
-    ],
-  }
+  const courses = [
+    {
+      name: 'Half Stack application development',
+      id: 1,
+      parts: [
+        {
+          name: 'Fundamentals of React',
+          exercises: 10,
+          id: 1,
+        },
+        {
+          name: 'Using props to pass data',
+          exercises: 7,
+          id: 2,
+        },
+        {
+          name: 'State of a component',
+          exercises: 14,
+          id: 3,
+        },
+        {
+          name: 'Redux',
+          exercises: 11,
+          id: 4,
+        },
+      ],
+    },
+    {
+      name: 'Node.js',
+      id: 2,
+      parts: [
+        {
+          name: 'Routing',
+          exercises: 3,
+          id: 1,
+        },
+        {
+          name: 'Middlewares',
+          exercises: 7,
+          id: 2,
+        },
+      ],
+    },
+  ]
 
   return (
     <>
-      <Course course={course} />
+      <p>2.4</p>
+      {courses.map((course) => (
+        <Course key={course.id} course={course} />
+      ))}
     </>
   )
 }
 
 export default App
+/* 2.4 steps and notes
+1) just need to map through the courses array and return a course component that takes a course and a key
 
-/* 2.2 steps and notes
+
+/* 2.2 / 2.3 steps and notes
 1) had to clean up every component by DESTRUCTURING the props, this makes it a lot easier to know what the props actually are
 2) I then had to use higher order functions (MAP) to account for additions of new parts to the course, which would affect the sum of all courses.
 --- my map function returns a <Part/> component that recieves 2 props, the name and exercises of each part
